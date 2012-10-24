@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# ソースフォルダが置いてあるフォルダを指定します。
+SOURCES_FOLDER=/home/shinsaka/workspace
+
+# ソースフォルダ名の先頭文字列を指定します。
+SOURCES_PREFIX=cvsprj
+
+# シンボリックリンクを置くフォルダを指定します。
+LINK_FOLDER=/home/shinsaka
+
+# シンボリックリンク名を指定します。
+LINK_NAME=prj
+
+
+TARGET_LIST=`ls $SOURCES_FOLDER | grep "^$SOURCES_PREFIX"`
+
+echo "変更する対象を選択して下さい。"
+select item in $TARGET_LIST; do
+  TARGET_NAME=$item
+  break
+done
+
+if [ -z "$TARGET_NAME" ]; then
+  echo "切り替え先のソース名を指定して下さい。"
+  exit 1
+fi
+if [ ! -d "$SOURCES_FOLDER/$TARGET_NAME" ]; then
+  echo "$TARGET_NAME というフォルダは存在しませんでした。"
+  exit 1
+fi
+
+rm $LINK_FOLDER/$LINK_NAME
+ln -s $SOURCES_FOLDER/$TARGET_NAME $LINK_FOLDER/$LINK_NAME
+echo "$TARGET_NAME へ変更が成功しました。"
+

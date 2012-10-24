@@ -1,0 +1,4 @@
+#QUERY_STRING="start_debug=1&debug_host=192.168.43.97&debug_port=10137&debug_stop=0&no_remote=0&debug_session_id=12345"
+QUERY_STRING="start_debug=1&debug_host=db.dp-dev-shinsaka&debug_port=10137&debug_stop=0&no_remote=0&debug_session_id=12345"
+export QUERY_STRING
+/usr/bin/php $*
